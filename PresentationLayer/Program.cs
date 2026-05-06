@@ -1,14 +1,13 @@
-using ApplicationLayer.Common.Behaviors;
-using ApplicationLayer.Features.Products.Commands;
-using ApplicationLayer.Interfaces;
-using InfrastructureLayer.Persistence;
-using InfrastructureLayer.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
+using ApplicationLayer;    // Extension Method بتاعتك
+using InfrastructureLayer; // Extension Method بتاعتك
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 1. تسجيل خدمات كل طبقة (Clean & Organized)
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
+// 2. خدمات الـ API التقليدية
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -16,38 +15,13 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "Clean Arch Product API", Version = "v1" });
 });
 
-// ====================== CORS ======================
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
-
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
-
-// ==================== MediatR ====================
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssembly(typeof(CreateProductCommand).Assembly);
-    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
- });
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
-
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductReadRepository, ProductReadRepository>();
-
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 3. الـ Middleware Pipeline
 if (app.Environment.IsDevelopment())
 {
     //app.MapOpenApi();
@@ -60,11 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("AllowAll");
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

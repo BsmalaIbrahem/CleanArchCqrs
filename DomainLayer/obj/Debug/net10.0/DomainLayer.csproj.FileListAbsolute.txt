@@ -1,0 +1,14 @@
+E:\C#\DomainLayer\bin\Debug\net10.0\DomainLayer.deps.json
+E:\C#\DomainLayer\bin\Debug\net10.0\DomainLayer.runtimeconfig.json
+E:\C#\DomainLayer\bin\Debug\net10.0\DomainLayer.dll
+E:\C#\DomainLayer\bin\Debug\net10.0\DomainLayer.pdb
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.AssemblyInfoInputs.cache
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.AssemblyInfo.cs
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.csproj.CoreCompileInputs.cache
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.sourcelink.json
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.dll
+E:\C#\DomainLayer\obj\Debug\net10.0\refint\DomainLayer.dll
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.pdb
+E:\C#\DomainLayer\obj\Debug\net10.0\DomainLayer.genruntimeconfig.cache
+E:\C#\DomainLayer\obj\Debug\net10.0\ref\DomainLayer.dll

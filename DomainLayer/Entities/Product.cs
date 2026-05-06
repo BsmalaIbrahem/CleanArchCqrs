@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace DomainLayer.Entities
 {
     public class Product : BaseEntity<Guid>, IAuditable
@@ -50,7 +51,7 @@ namespace DomainLayer.Entities
                 throw new DomainException("Product description cannot be empty.");
         }
 
-                private void ValidatePrice(Money price)
+        private void ValidatePrice(Money price)
         {
             if (price.Amount <= 0)
                 throw new DomainException("Product price must be greater than zero.");

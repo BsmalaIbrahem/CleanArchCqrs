@@ -2,5 +2,5 @@
   <Project Path="ApplicationLayer/ApplicationLayer.csproj" />
   <Project Path="DomainLayer/DomainLayer.csproj" />
   <Project Path="InfrastructureLayer/InfrastructureLayer.csproj" />
-  <Project Path="PresentationLayer/PresentationLayer.csproj" />
+  <Project Path="PresentationLayer/PresentationLayer.csproj" Id="4c27706c-18e6-44dc-8608-de3ff28538c4" />
 </Solution>

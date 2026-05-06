@@ -3,6 +3,7 @@ using ApplicationLayer.Interfaces;
 using DomainLayer.Entities;
 using DomainLayer.Exceptions;
 using DomainLayer.ValueObjects;
+using ErrorOr;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Text;
 
 namespace ApplicationLayer.Features.Products.Handlers
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Guid>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ErrorOr<Guid>>
     {
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -22,12 +23,12 @@ namespace ApplicationLayer.Features.Products.Handlers
 
         }
 
-        public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<Guid>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             // 1. التحقق من أن الاسم غير مكرر (Business Rule)
             if (!await _productRepository.IsNameUniqueAsync(request.Name, cancellationToken))
             {
-                throw new DomainException($"A product with the name '{request.Name}' already exists.");
+                return Error.Conflict(description: $"A product with the name '{request.Name}' already exists.");
             }
 
             // 2. إنشاء الـ Product Entity (Rich Domain Model)

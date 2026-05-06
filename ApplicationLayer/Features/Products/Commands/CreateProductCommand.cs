@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using ErrorOr;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,5 @@ namespace ApplicationLayer.Features.Products.Commands
         string Description,
         int StockQuantity,
         string? SKU
-    ) : IRequest<Guid>;
+    ) : IRequest<ErrorOr<Guid>>;
 }
